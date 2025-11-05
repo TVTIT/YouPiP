@@ -25,15 +25,7 @@ jobs:
         uses: levibostian/action-hide-sensitive-inputs@v1
         with:
           exclude_inputs: bundle_id,display_name,enable_demc,enable_ryd,enable_youpip,enable_yq,enable_ytuhd,info_note,tweak_version
-
-      - name: Download and validate IPA
-        run: |
-          wget "${{ inputs.ipa_url }}" --no-verbose -O ${{ github.workspace }}/youtube.ipa
-          file_type=$(file --mime-type -b ${{ github.workspace }}/youtube.ipa)
-          if [[ "$file_type" != "application/x-ios-app" && "$file_type" != "application/zip" ]]; then
-            echo "::error::Validation failed: The downloaded file is not a valid IPA. Detected type: $file_type."
-            exit 1
-          fi
+          
       - name: Install Dependencies
         run: brew install make ldid
 
